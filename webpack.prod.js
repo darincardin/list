@@ -9,7 +9,7 @@ module.exports = (env) => {
 	  output: {
 		path: path.resolve(__dirname, 'dist'), 
 		filename: 'index.js',
-		library: ['list'],
+		//library: ['list'],
 		libraryTarget: 'umd',
 		publicPath:'/dist'
 	  },

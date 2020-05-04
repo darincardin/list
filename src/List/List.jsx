@@ -1,10 +1,18 @@
 import React from 'react';
-import {ListHeader ,ListBody, ListFooter, ListLoader} from './';
+
+import ListHeader from './ListHeader/ListHeader.jsx';
+import ListBody from './ListBody/ListBody.jsx';
+import ListFooter from './ListFooter/ListFooter.jsx';
+import ListLoader from './ListLoader/ListLoader.jsx';
+
+
+
+
 import PropTypes from 'prop-types';
 
 
 //import 'bootstrap';
-import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+//import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import './list.scss';
 
 const INITIAL_STATE = {page:0, total:0, loading:false, sort:{by:"id", dir:"ASC"}}

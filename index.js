@@ -1,4 +1,5 @@
 
 import List from './dist';
 
-export {List}
+
+export default List;
