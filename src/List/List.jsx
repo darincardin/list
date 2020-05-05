@@ -42,8 +42,8 @@ class List extends React.Component {
 
 		if(this.props.amount) this.AMOUNT = this.props.amount;
 		else {
-			this.generateAmount();
-			window.addEventListener('resize', this.handleEvent);
+			//this.generateAmount();
+			//window.addEventListener('resize', this.handleEvent);
 		}
 			
 		this.getOrders();

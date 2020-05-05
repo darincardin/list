@@ -14,7 +14,7 @@
       "@babel/preset-react"
     ]
   },
-  "description": "Form using ReactJS and Webpack",
+  "description": "List using ReactJS and Webpack",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
@@ -33,8 +33,8 @@
     "webpack-cli": "^3.3.11"
   },
   "license": "ISC",
-  "main": "index.js",
-  "name": "form",
+  "main": "dist/index.js",
+  "name": "list",
   "scripts": {
     "build": "clear && webpack --env.production=false --mode development --config webpack.prod.js",
     "start": "clear && webpack --env.production=false --mode development --config webpack.config.js &&  webpack-dev-server --hot --env.production=false",
