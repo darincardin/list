@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ListHeader from './ListHeader/ListHeader.jsx';
 import ListBody from './ListBody/ListBody.jsx';
@@ -8,11 +9,11 @@ import ListLoader from './ListLoader/ListLoader.jsx';
 
 
 
-import PropTypes from 'prop-types';
 
 
-//import 'bootstrap';
-//import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+
+import 'bootstrap/dist/css/bootstrap.css';
+
 import './list.scss';
 
 const INITIAL_STATE = {page:0, total:0, loading:false, sort:{by:"id", dir:"ASC"}}
@@ -106,8 +107,6 @@ List.propTypes = {
 
 
 export default List;
-
-
 
 
 

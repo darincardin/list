@@ -10,6 +10,7 @@ module.exports = (env) => {
 		   'react': path.resolve(__dirname, './node_modules/react'),
            'react-dom': path.resolve(__dirname, './node_modules/react-dom'),    
 		   'prop-types': path.resolve(__dirname, './node_modules/prop-types'), 
+		   'bootstrap': path.resolve(__dirname, './node_modules/bootstrap'), 
 		},
 	  },
 	  entry: {	index: './src/index-prod.js'  },

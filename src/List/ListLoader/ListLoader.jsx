@@ -1,19 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 
 class ListLoader extends React.Component {
 		
-	//state = {loading:false}
-	
-	/*
-	show = ()=>{
-		this.setState({loading:true})
-	}
-	
-	hide = ()=>{
-		this.setState({loading:false})
-	}
-	*/
+
 	render() {
 		return (
 		<>
