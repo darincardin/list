@@ -12,7 +12,7 @@ import ListLoader from './ListLoader/ListLoader.jsx';
 
 
 
-import 'bootstrap/dist/css/bootstrap.css';
+//import 'bootstrap/dist/css/bootstrap.css';
 
 import './list.scss';
 
