@@ -5,7 +5,7 @@ This library provides a dynamic list widget for use with your project.
 
 Library can be installed by adding this line to package.json dependancies:
 ```js
-"list": "darincardin/list#1.1.4",
+"list": "darincardin/list#1.1.5",
 ```
 
 The widget can then be included in the project like this:
