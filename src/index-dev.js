@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import OrderAPI from './js/orderAPI.js'
 import List from './List/List.jsx'
 
-
+import 'bootstrap/dist/css/bootstrap.css';
 
 class Main extends React.Component {
 	

@@ -1,37 +1,86 @@
 const path = require('path');
 var webpack = require('webpack');
 
-module.exports = (env) => {
-	
+
+
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
+
+module.exports = env => {
+
+
+
 	return  {
 	  resolve: {
-		extensions: ['*','.js','.jsx'],
+		modules: [__dirname, 'node_modules'],
 		alias:{
-		   'react': path.resolve(__dirname, './node_modules/react'),
-           'react-dom': path.resolve(__dirname, './node_modules/react-dom'),    
-		   'prop-types': path.resolve(__dirname, './node_modules/prop-types'), 
-		   'bootstrap': path.resolve(__dirname, './node_modules/bootstrap'), 
+		   '/js': path.resolve(__dirname, 'src/js/'),
+		   '/jsx': path.resolve(__dirname, 'src/jsx/'),
+		   '$': "jquery",  
 		},
+		extensions: ['*','.js','.jsx']
 	  },
-	  entry: {	index: './src/index-prod.js'  },
+	  
+	  plugins: [	
+			new CleanWebpackPlugin(),
+		    new CopyPlugin({
+			    patterns: [ {from: 'src/index.html', to: '' } ],
+			}),
+			new webpack.ProvidePlugin({    
+				$: "jquery",  
+				jQuery: "jquery",  
+				_: 'underscore'  
+			  }) 
+	  ],
+	  
+	  entry: {index: './src/index-prod.js'  },
+
 	  output: {
-		path: path.resolve(__dirname, 'dist'), 
-		filename: 'index.js',
-		//library: ['list'],
-		libraryTarget: 'umd',
-		publicPath:'/dist'
+		path: path.resolve(__dirname, 'dist'), filename: '[name].js'
+	  },
+	  devServer: {
+		contentBase:  require('path').join(__dirname, "src"),
+		publicPath: '/',
+		historyApiFallback: {
+			rewrites: [
+				{ from: /^.*$/, to: '/' }
+			]
+		},
+		inline: true,
+		port: 7777   ,
 	  },
 	  module: {
 		rules: [
 			{ test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
-	    	{ test:/\.(s*)css$/, use:['style-loader','css-loader', 'sass-loader']  },	
+            { test:/\.(s*)css$/, use:['style-loader','css-loader', 'sass-loader']  },			
 			{
-				test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-				use: {
-					loader: 'file-loader',
-					options: { name: '[name].[ext]',  outputPath: 'fonts/'} 
-				}
-		    }	
+			    test: /\.(png|jpe?g|gif)$/i, 
+				exclude: /node_modules/, 
+				use: [{  loader: 'file-loader',  options: {  name: '[name].[ext]'}} ]
+			},
+			{
+				test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+				loader: 'url-loader'
+			},
+			
+			/*
+            {
+                test: require.resolve('jquery'),
+                use: [{
+                        loader: 'expose-loader',
+                        options: 'jQuery'
+                    },
+                    {
+                        loader: 'expose-loader',
+                        options: '$'
+                    }
+                ]
+            }			
+			
+			*/
+			
+			
 		]
 	  }
 	}

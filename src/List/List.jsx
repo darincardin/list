@@ -7,17 +7,11 @@ import ListFooter from './ListFooter/ListFooter.jsx';
 import ListLoader from './ListLoader/ListLoader.jsx';
 
 
-
-
-
-
-
-//import 'bootstrap/dist/css/bootstrap.css';
-
 import './list.scss';
 
 const INITIAL_STATE = {page:0, total:0, loading:false, sort:{by:"id", dir:"ASC"}}
 const ROW_SIZE = 40;
+
 
 class List extends React.Component {
 	AMOUNT = 0;   
@@ -25,30 +19,32 @@ class List extends React.Component {
 
 	constructor(props){
 		super(props)
-		
-		this.ref = React.createRef()
-		
+		this.ref = React.createRef()	
 	}
 
+	setHeight = ()=>{
+		this.height = ((this.AMOUNT + 2) * ROW_SIZE) + "px" ;		
+	}
 
-	generateAmount = () => {
-		
+	generateAmount = () => {	
 		var height = this.ref.current.parentElement.offsetHeight;
-		this.AMOUNT = Math.floor((height/ROW_SIZE) - 2);	
-		
-		this.ref.current.style.height =  ((this.AMOUNT + 2) * ROW_SIZE) + "px" ;
+		this.AMOUNT = Math.floor((height/ROW_SIZE) - 2);
+		this.setHeight();
 	}
 	
 	componentDidMount = ()=>{
 
+		window.addEventListener('list.repopulate', this.handleEvent);
+
 		if(this.props.amount) this.AMOUNT = this.props.amount;
 		else {
-			//this.generateAmount();
-			//window.addEventListener('resize', this.handleEvent);
+			this.generateAmount();
+			window.addEventListener('resize', this.handleEvent);
 		}
+		
+		this.setHeight();
 			
 		this.getOrders();
-		if(this.props.action) this.showActions = true;
 	}
 	
 	handleEvent = () => {
@@ -63,7 +59,7 @@ class List extends React.Component {
 	getOrders = (page = this.state.page, sort = this.state.sort) => {
 	
 		this.setState({loading:true})
-		
+
 		this.props.getData(page, sort, this.AMOUNT).then(res=>{
 			this.setState({ page, total:res.total,  sort:sort,  loading:false })	
 		})
@@ -72,27 +68,28 @@ class List extends React.Component {
 		})	
 	}	
 	
-	action = id=>{
-		this.setState({loading:true})
-
-		this.props.action(id).then(res =>{
-			this.getOrders()
-		})
-		.catch( err =>{
-			this.setState({...INITIAL_STATE})
-		})	
+	onActionClick = (row, action) =>{
+		
+		var promise = action(row);
+		
+		if(promise)
+			promise.then( res=>{
+				this.getOrders()
+			});
 	}
 	
 	render = () => {
 	    return  (
-			<div ref={this.ref} className="list"> 
+			<div ref={this.ref} className="list" style={{height: this.height}}> 
 				<ListLoader show={this.state.loading} />
+				
 				<table>
-					<ListHeader update={this.getOrders} sort={this.state.sort} action={this.props.action}  />
-					<ListBody data={this.props.data} edit={this.edit} action={this.props.action && this.action}      />
+					<ListHeader update={this.getOrders} sort={this.state.sort} hasActions={this.props.children!=null} />
+					<ListBody data={this.props.data} children={this.props.children} onClick={this.onActionClick}   />
 				</table>
+				
 				<ListFooter update={this.getOrders} page={this.state.page} max={this.state.total} />
-			</ div>
+			</div>
 		)
 	}
 }		
@@ -104,9 +101,4 @@ List.propTypes = {
 	amount: PropTypes.number,
 };
 
-
-
 export default List;
-
-
-
