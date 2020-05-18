@@ -22,6 +22,7 @@ class List extends React.Component {
 		this.ref = React.createRef()	
 	}
 
+
 	setHeight = ()=>{
 		this.height = ((this.AMOUNT + 2) * ROW_SIZE) + "px" ;		
 	}
