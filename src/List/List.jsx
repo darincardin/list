@@ -11,7 +11,7 @@ import './list.scss';
 
 const INITIAL_STATE = {page:0, total:0, loading:false, sort:{by:"id", dir:"ASC"}}
 const ROW_SIZE = 40;
-
+//Test
 
 class List extends React.Component {
 	AMOUNT = 0;   
