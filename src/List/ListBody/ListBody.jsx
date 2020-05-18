@@ -14,10 +14,7 @@ var ListBody = props =>{
 					<td>{r.address}</td>						
 				
 					<td>
-						{React.Children.map(props.children, child => {
-							if(child.props) return React.cloneElement(child, {onClick:()=>{ props.onClick(r, child.props.action)} }, child.props.children);
-							else return React.cloneElement(<span/>, {}, child);
-						})}
+
 					</td>	
 				</tr>  
 			)}
@@ -26,3 +23,10 @@ var ListBody = props =>{
 }
 
 export default ListBody;
+
+/*
+						{React.Children.map(props.children, child => {
+							if(child.props) return React.cloneElement(child, {onClick:()=>{ props.onClick(r, child.props.action)} }, child.props.children);
+							else return React.cloneElement(<span/>, {}, child);
+						})}
+*/

@@ -36,8 +36,3 @@ class Main extends React.Component {
 }
 
 ReactDOM.render( <Main />, document.getElementById('app'));
-
-/* action={this.remove}
-<Provider store={createStore(reducer)}><List/></Provider>
-amount={5}
-*/
