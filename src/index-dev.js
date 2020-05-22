@@ -29,7 +29,7 @@ class Main extends React.Component {
 			return OrderAPI.delete(id);
 		}		
 	}	
-	
+	  
 	render = ()=>{
 		return <List data={this.state.data} getData={this.getData}   />	
 	}
