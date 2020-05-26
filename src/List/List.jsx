@@ -28,6 +28,8 @@ class List extends React.Component {
 	}
 
 	generateAmount = () => {	
+	
+	
 		var height = this.ref.current.parentElement.offsetHeight;
 		this.AMOUNT = Math.floor((height/ROW_SIZE) - 2);
 		this.setHeight();
@@ -35,7 +37,7 @@ class List extends React.Component {
 	
 	componentDidMount = ()=>{
 
-		window.addEventListener('list.repopulate', this.handleEvent);
+		window.addEventListener('list.update', this.handleEvent);
 
 		if(this.props.amount) this.AMOUNT = this.props.amount;
 		else {
