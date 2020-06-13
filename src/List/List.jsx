@@ -87,8 +87,8 @@ class List extends React.Component {
 				<ListLoader show={this.state.loading} />
 				
 				<table>
-					<ListHeader update={this.getOrders} sort={this.state.sort} hasActions={this.props.children!=null} />
-					<ListBody data={this.props.data} children={this.props.children} onClick={this.onActionClick}   />
+					<ListHeader labels={this.props.labels} update={this.getOrders} sort={this.state.sort} hasActions={this.props.children!=null} />
+					<ListBody   labels={this.props.labels} data={this.props.data} children={this.props.children} onClick={this.onActionClick}   />
 				</table>
 				
 				<ListFooter update={this.getOrders} page={this.state.page} max={this.state.total} />
@@ -98,6 +98,7 @@ class List extends React.Component {
 }		
 
 List.propTypes = {
+	labels: PropTypes.array.isRequired,
     data: PropTypes.array.isRequired,
     getData: PropTypes.func.isRequired,
 	action: PropTypes.func,

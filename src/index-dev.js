@@ -9,6 +9,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 class Main extends React.Component {
 	
 	state = { data:[] }
+	
+	labels = [
+		{name:'ID',id:'id'},
+		{name:'First Name',id:'fName'},
+		{name:'Last Name',id:'lName'},
+		{name:'Qty',id:'quantity'},
+		{name:'Phone',id:'phone'},
+		{name:'Address',id:'address'}
+	]
+	
 
 	getData = (page, sort, amount)=>{
 		
@@ -22,7 +32,10 @@ class Main extends React.Component {
 		this.props.setSelected(selected);
 	}
 
-
+	dummy = ()=>{}
+	
+	
+	
 
 	remove = (id) => {
 		if(confirm(`Delete order ${id}?`)) {	
@@ -31,7 +44,12 @@ class Main extends React.Component {
 	}	
 	  
 	render = ()=>{
-		return <List data={this.state.data} getData={this.getData}   />	
+		return (
+		<List labels={this.labels} data={this.state.data} getData={this.getData}   >	
+			<a action={this.dummy}>Edit</a> 
+				&nbsp;|&nbsp; 
+			<a action={this.dummy}>Delete</a> 
+		</List>)
 	}
 }
 

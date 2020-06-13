@@ -21,22 +21,19 @@ var Href = props => {
 
 var ListHeader = props => {
 
-		return (	
-			<thead>
-				<tr>
-					<td><Href {...props} name="id" >ID</Href></td>
-					<td><Href {...props} name="firstname" >First Name</Href></td>
-					<td><Href {...props} name="lastname" >Last Name</Href></td>
-					<td><Href {...props} name="quantity" >Qty</Href></td>
-					<td><Href {...props} name="phone" >Phone</Href></td>
-					<td><Href {...props} name="address" >Address</Href></td>
-					{	props.hasActions && 
-						<td><a>Actions</a></td>
-					}
-				</tr>
-			</thead>
-		)
+	return (	
+		<thead>
+			<tr>
+				{
+					props.labels.map((label,i)=>
+					(<td key={i}>
+						<Href {...props} name={label.id} >{label.name}</Href>
+					</td>))	
+				}
+				{props.hasActions && <td>Actions</td>}
+			</tr>
+		</thead>
+	)
 }
 
 export default ListHeader;
-
