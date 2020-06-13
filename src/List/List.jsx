@@ -69,7 +69,7 @@ class List extends React.Component {
 		.catch( err =>{
 			this.setState({...INITIAL_STATE})
 		})	
-	}	
+	}	    
 	
 	onActionClick = (row, action) =>{
 		
