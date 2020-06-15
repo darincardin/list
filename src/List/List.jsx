@@ -72,7 +72,7 @@ class List extends React.Component {
 	}	    
 	
 	onActionClick = (row, action) =>{
-		
+		debugger;
 		var promise = action(row);
 		
 		if(promise)

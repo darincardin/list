@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import {BrowserRouter as Router, Redirect, Switch, Route, Link,NavLink,  withRouter} from "react-router-dom";
 import OrderAPI from './js/orderAPI.js'
 import List from './List/List.jsx'
 
@@ -21,7 +21,6 @@ class Main extends React.Component {
 	
 
 	getData = (page, sort, amount)=>{
-		
 		return OrderAPI.list(page, sort, amount).then(res=>{
 			this.setState({ data:res.data })
 			return res;
@@ -32,11 +31,10 @@ class Main extends React.Component {
 		this.props.setSelected(selected);
 	}
 
-	dummy = ()=>{}
+	dummy = (obj)=>{
+		alert(Object.entries(obj).join('  '))
+	}
 	
-	
-	
-
 	remove = (id) => {
 		if(confirm(`Delete order ${id}?`)) {	
 			return OrderAPI.delete(id);
@@ -45,11 +43,25 @@ class Main extends React.Component {
 	  
 	render = ()=>{
 		return (
-		<List labels={this.labels} data={this.state.data} getData={this.getData}   >	
-			<a action={this.dummy}>Edit</a> 
-				&nbsp;|&nbsp; 
-			<a action={this.dummy}>Delete</a> 
-		</List>)
+			<Router>	
+				<Switch>
+					<Route path="/list" >
+						<List labels={this.labels} data={this.state.data} getData={this.getData}  action={this.dummy} >	
+							<NavLink to="/detail">Detail</NavLink>
+								&nbsp;|&nbsp; 
+							<a onClick={this.dummy}>Delete</a> 
+						</List>
+					</Route>
+					
+					<Route path="/detail">
+						<div>detail</div>
+					</Route>
+					
+					<Redirect from="/" to="/list" />	
+				</Switch>
+			</Router>
+					
+		)			
 	}
 }
 
