@@ -6,6 +6,8 @@ import List from './List/List.jsx'
 
 import 'bootstrap/dist/css/bootstrap.css';
 
+window._react = null;
+
 class Main extends React.Component {
 	
 	state = { data:[] }
@@ -49,7 +51,7 @@ class Main extends React.Component {
 						<List labels={this.labels} data={this.state.data} getData={this.getData}  action={this.dummy} >	
 							<NavLink to="/detail">Detail</NavLink>
 								&nbsp;|&nbsp; 
-							<a onClick={this.dummy}>Delete</a> 
+							<a onClick={this.dummy}>Alert</a> 
 						</List>
 					</Route>
 					

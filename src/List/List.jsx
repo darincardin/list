@@ -19,6 +19,7 @@ class List extends React.Component {
 
 	constructor(props){
 		super(props)
+		//if(window._react) this.state = window._react;
 		this.ref = React.createRef()	
 	}
 
@@ -50,6 +51,14 @@ class List extends React.Component {
 		this.getOrders();
 	}
 	
+	/*
+	componentWillUnmount = ()=>{
+		var a = this.state;
+		window._react = a;
+		debugger;
+	}
+	*/
+	
 	handleEvent = () => {
 		if(this.cancel) clearTimeout(this.cancel);
 		
@@ -72,7 +81,6 @@ class List extends React.Component {
 	}	    
 	
 	onActionClick = (row, action) =>{
-		debugger;
 		var promise = action(row);
 		
 		if(promise)
