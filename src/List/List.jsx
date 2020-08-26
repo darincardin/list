@@ -5,32 +5,30 @@ import ListHeader from './ListHeader/ListHeader.jsx';
 import ListBody from './ListBody/ListBody.jsx';
 import ListFooter from './ListFooter/ListFooter.jsx';
 import ListLoader from './ListLoader/ListLoader.jsx';
+import ListState from './ListState/ListState.js';
 
 
 import './list.scss';
 
-const INITIAL_STATE = {page:0, total:0, loading:false, sort:{by:"id", dir:"ASC"}}
+
 const ROW_SIZE = 40;
 
 
 class List extends React.Component {
+		
 	AMOUNT = 0;   
-	state = {...INITIAL_STATE}
+	state = { ...new ListState() }
 
 	constructor(props){
 		super(props)
-		//if(window._react) this.state = window._react;
 		this.ref = React.createRef()	
 	}
-
 
 	setHeight = ()=>{
 		this.height = ((this.AMOUNT + 2) * ROW_SIZE) + "px" ;		
 	}
 
 	generateAmount = () => {	
-	
-	
 		var height = this.ref.current.parentElement.offsetHeight;
 		this.AMOUNT = Math.floor((height/ROW_SIZE) - 2);
 		this.setHeight();
@@ -51,14 +49,6 @@ class List extends React.Component {
 		this.getOrders();
 	}
 	
-	/*
-	componentWillUnmount = ()=>{
-		var a = this.state;
-		window._react = a;
-		debugger;
-	}
-	*/
-	
 	handleEvent = () => {
 		if(this.cancel) clearTimeout(this.cancel);
 		
@@ -73,10 +63,12 @@ class List extends React.Component {
 		this.setState({loading:true})
 
 		this.props.getData(page, sort, this.AMOUNT).then(res=>{
-			this.setState({ page, total:res.total,  sort:sort,  loading:false })	
+			this.setState({ page, total:res.total,  sort:sort, loading:false },
+				()=>{  ListState.set(this.state)  }
+			)	
 		})
 		.catch( err =>{
-			this.setState({...INITIAL_STATE})
+			this.setState({...ListState.DEFAULT_STATE})
 		})	
 	}	    
 	

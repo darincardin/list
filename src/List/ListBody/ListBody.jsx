@@ -34,33 +34,3 @@ var ListBody = props =>{
 
 export default ListBody;
 
-/*
-
-
-
-
-
-
-			{props.data  && props.data.map( r =>  
-				<tr key={r.id}>
-				
-				{
-					Object.keys(r).map((v,i)=>(
-					
-						<td key={i}>{r[v]}</td>
-					))
-					
-				}
-				
-				
-
-				</tr>  
-
-
-
-
-
-
-
-
-*/

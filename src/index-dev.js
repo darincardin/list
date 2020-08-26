@@ -10,7 +10,17 @@ window._react = null;
 
 class Main extends React.Component {
 	
+	
+
+	
 	state = { data:[] }
+	
+	constructor(props){
+		super(props);
+		
+		
+		//sort:{by:"id", dir:"ASC"}
+	}
 	
 	labels = [
 		{name:'ID',id:'id'},
@@ -47,22 +57,15 @@ class Main extends React.Component {
 		return (
 			<Router>	
 				<Switch>
-					<Route path="/list" >
+
+					<Route path="/" >
 						<List labels={this.labels} data={this.state.data} getData={this.getData}  action={this.dummy} >	
-							<NavLink to="/detail">Detail</NavLink>
-								&nbsp;|&nbsp; 
+
 							<a onClick={this.dummy}>Alert</a> 
 						</List>
 					</Route>
-					
-					<Route path="/detail">
-						<div>detail</div>
-					</Route>
-					
-					<Redirect from="/" to="/list" />	
 				</Switch>
-			</Router>
-					
+			</Router>			
 		)			
 	}
 }

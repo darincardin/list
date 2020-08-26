@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 var Href = props => { 
 
 	var className = (props.sort.by == props.name) ? props.sort.dir:"";
